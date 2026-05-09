@@ -56,8 +56,12 @@
         gpxFiles.forEach(f => {
           const rawUrl  = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/maps/${encodeURIComponent(f.name)}`;
           const studioUrl = gpxStudioUrl(rawUrl);
+          const a = document.createElement('a');
+          a.href = studioUrl;
+          a.target = '_blank';
+          a.textContent = f.name;
           const li = document.createElement('li');
-          li.innerHTML = `<a href="${studioUrl}" target="_blank">${f.name}</a>`;
+          li.appendChild(a);
           listEl.appendChild(li);
         });
       } catch (err) {
