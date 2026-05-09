@@ -35,9 +35,9 @@ $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')
         <ul>
             <?php foreach ($gpxFiles as $file): ?>
                 <?php
-                $filePath = ($basePath === '' ? '' : $basePath) . '/maps/' . rawurlencode($file);
+                $filePath = $basePath . '/maps/' . rawurlencode($file);
                 $fileUrl = $scheme . '://' . $host . $filePath;
-                $state = rawurlencode(json_encode(['urls' => [$fileUrl]], JSON_UNESCAPED_SLASHES));
+                $state = rawurlencode(json_encode(['urls' => [$fileUrl]]));
                 ?>
                 <li>
                     <a href="https://gpx.studio/?state=<?= $state ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($file, ENT_QUOTES, 'UTF-8') ?></a>
