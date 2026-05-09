@@ -2,7 +2,7 @@
 
 This page is designed to be readable directly on GitHub.
 
-## GPX files in `maps/`
+## How to add GPX files
 
 _No GPX files found yet._
 
