@@ -13,7 +13,10 @@ if (is_dir($mapsDir)) {
 }
 
 $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$host = $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost');
+if (!preg_match('/^[A-Za-z0-9.-]+(?::\d{1,5})?$/', $host)) {
+    $host = 'localhost';
+}
 $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
 ?>
 <!DOCTYPE html>
@@ -21,7 +24,7 @@ $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bike Maps</title>
+    <title>Bike maps</title>
 </head>
 <body>
     <h1>Bike maps</h1>
