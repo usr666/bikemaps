@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bike Maps</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #222;
+    }
+    h1 { margin-bottom: 0.25rem; }
+    p.subtitle { color: #555; margin-top: 0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.4rem 0; }
+    a { color: #0969da; }
+    #status { color: #555; font-style: italic; }
+    .error { color: #c00; font-style: normal; }
+  </style>
+</head>
+<body>
+  <h1>🚴 Bike Maps</h1>
+  <p class="subtitle">GPX tracks — click any link to open in <a href="https://gpx.studio" target="_blank">gpx.studio</a></p>
+
+  <ul id="list"><li id="status">Loading…</li></ul>
+
+  <script>
+    const OWNER  = 'usr666';
+    const REPO   = 'bikemaps';
+    const BRANCH = 'main';
+    const API    = `https://api.github.com/repos/${OWNER}/${REPO}/contents/maps`;
+
+    function gpxStudioUrl(rawUrl) {
+      const state = JSON.stringify({ urls: [rawUrl] });
+      return `https://gpx.studio/?state=${encodeURIComponent(state)}`;
+    }
+
+    async function loadFiles() {
+      const statusEl = document.getElementById('status');
+      try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(`GitHub API error ${res.status}`);
+        const files = await res.json();
+        const gpxFiles = files.filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.gpx'));
+
+        const listEl = document.getElementById('list');
+        if (gpxFiles.length === 0) {
+          statusEl.textContent = 'No GPX files found in maps/ yet.';
+          return;
+        }
+
+        listEl.innerHTML = '';
+        gpxFiles.forEach(f => {
+          const rawUrl  = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/maps/${encodeURIComponent(f.name)}`;
+          const studioUrl = gpxStudioUrl(rawUrl);
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${studioUrl}" target="_blank">${f.name}</a>`;
+          listEl.appendChild(li);
+        });
+      } catch (err) {
+        statusEl.className = 'error';
+        statusEl.textContent = `Could not load file list: ${err.message}`;
+      }
+    }
+
+    loadFiles();
+  </script>
+</body>
+</html>

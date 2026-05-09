@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="bikemaps"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Sample Bike Route</name>
+    <desc>A short sample GPX track for testing gpx.studio links</desc>
+  </metadata>
+  <trk>
+    <name>Sample Bike Route</name>
+    <trkseg>
+      <trkpt lat="48.8584" lon="2.2945"><ele>35</ele></trkpt>
+      <trkpt lat="48.8600" lon="2.2960"><ele>36</ele></trkpt>
+      <trkpt lat="48.8620" lon="2.2980"><ele>37</ele></trkpt>
+      <trkpt lat="48.8645" lon="2.3010"><ele>38</ele></trkpt>
+      <trkpt lat="48.8670" lon="2.3050"><ele>40</ele></trkpt>
+      <trkpt lat="48.8700" lon="2.3100"><ele>42</ele></trkpt>
+      <trkpt lat="48.8725" lon="2.3145"><ele>41</ele></trkpt>
+      <trkpt lat="48.8750" lon="2.3180"><ele>39</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
