@@ -1,4 +1,5 @@
 # bikemaps
 Collection of bicycle maps
 
-Place `.gpx` files in the `maps/` directory and open `index.php` to browse them.
+- Store `.gpx` files in [`maps/`](./maps/)
+- Open [`index.md`](./index.md) directly on github.com to see GPX links for gpx.studio
